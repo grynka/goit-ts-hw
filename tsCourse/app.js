@@ -1,18 +1,49 @@
 "use strict";
-const page1 = {
-    title: 'The awesome page',
-    likes: 100,
-    accounts: ['Max', 'Anton', 'Nikita'],
-    status: 'open',
-    details: {
-        createAt: '2021-01-01',
-        updateAt: '2021-05-01',
+class Key {
+    constructor() {
+        this.signature = Math.random();
     }
-};
-const page2 = {
-    title: 'Python or Js',
-    likes: 5,
-    accounts: ['Alex'],
-    status: 'close',
-};
+    getSignature() {
+        console.log(this.signature)
+        return this.signature;
+    }
+}
+class Person {
+    constructor(key) {
+        this.key = key;
+    }
+    getKey() {
+        console.log(this.key)
+        return this.key;
+    }
+}
+class House {
+    constructor(key) {
+        this.key = key;
+        this.door = false;
+        this.tenants = [];
+    }
+    comeIn(person) {
+        console.log(person)
+
+        if (!this.door) {
+            throw new Error('Door is close');
+        }
+        this.tenants.push(person);
+        console.log('Person inside');
+    }
+}
+class MyHouse extends House {
+    openDoor(key) {
+        if (key.getSignature() !== this.key.getSignature()) {
+            throw new Error('Key to another door');
+        }
+        return this.door = true;
+    }
+}
+const key = new Key();
+const house = new MyHouse(key);
+const person = new Person(key);
+house.openDoor(person.getKey());
+house.comeIn(person);
 //# sourceMappingURL=app.js.map
