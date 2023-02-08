@@ -4,7 +4,6 @@ class Key {
         this.signature = Math.random();
     }
     getSignature() {
-        console.log(this.signature)
         return this.signature;
     }
 }
@@ -13,7 +12,6 @@ class Person {
         this.key = key;
     }
     getKey() {
-        console.log(this.key)
         return this.key;
     }
 }
@@ -24,8 +22,6 @@ class House {
         this.tenants = [];
     }
     comeIn(person) {
-        console.log(person)
-
         if (!this.door) {
             throw new Error('Door is close');
         }
